@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 
-import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { useTheme } from '@mui/material/styles';
-import { useMediaQuery } from "@material-ui/core";
+import { createTheme } from "@material-ui/core/styles"; // @mui/material/styles does not work
+import { ThemeProvider, useTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import NavBar from "./NavBar";
 import appRoutes from "./routes";
@@ -20,7 +20,7 @@ const App = () => {
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
-    <MuiThemeProvider theme={isThemeLight ? lightTheme : darkTheme}>
+    <ThemeProvider theme={isThemeLight ? lightTheme : darkTheme}>
       <CssBaseline/>
       <Router>
         <NavBar isMobile={!matches} 
@@ -38,7 +38,7 @@ const App = () => {
           ))}
         </Switch>
       </Router>
-    </MuiThemeProvider>
+    </ThemeProvider>
   );
 }
 

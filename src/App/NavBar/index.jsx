@@ -1,9 +1,9 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
 import { Typography } from "@mui/material";
 
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -14,6 +14,8 @@ import TopMenu from "./TopMenu";
 import Logo from '../../assets/matcal.svg';
 import LogoWhite from '../../assets/matcal-white.svg';
 
+// TODO: mettere linea sotto link navbar on hover
+// TODO: colorare link se si è nella pagina 
 const NavBar = ({ isMobile, isThemeLight, setThemeLight }) => {
   return (
     <AppBar position="static">
