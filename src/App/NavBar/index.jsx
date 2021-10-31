@@ -1,35 +1,42 @@
-import { makeStyles } from '@material-ui/core/styles';
+import React from "react";
+import { NavLink } from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import { Typography } from "@mui/material";
 
-import MenuIcon from '@mui/icons-material/Menu';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-}));
+import SideMenu from "./SideMenu";
+import TopMenu from "./TopMenu";
+import Logo from '../../assets/matcal.svg';
+import LogoWhite from '../../assets/matcal-white.svg';
 
-const NavBar = ({ isThemeLight, setThemeLight }) => {
-  const classes = useStyles();
+const NavBar = ({ isMobile, isThemeLight, setThemeLight }) => {
   return (
     <AppBar position="static">
       <Toolbar variant="dense">
-        <IconButton className={classes.menuButton}>
-          <MenuIcon />
-        </IconButton>
-        <IconButton className={classes.menuButton}
-          onClick={()=>setThemeLight(x=>!x)}
-        >
-          {isThemeLight ? <DarkModeIcon /> : <LightModeIcon /> }
+        <NavLink to="/homepage" style={{ textDecoration: 'none', color: 'unset' }}>
+            <img alt="logo" src={isThemeLight ? Logo : LogoWhite} height={25} width={25} />
+        </NavLink>
+        <Typography variant="subtitle2">
+          <NavLink  to="/homepage" style={{ textDecoration: 'none', color: 'unset' }}>
+            Matteo Caldana
+          </NavLink >
+        </Typography>
+        {isMobile ?
+          <SideMenu />
+          :
+          <TopMenu />
+        }
+        <IconButton onClick={() => setThemeLight(x => !x)} size="medium">
+          {isThemeLight ?
+            <DarkModeIcon style={{ fill: "#88F" }} />
+            :
+            <LightModeIcon style={{ fill: "#FBD38D" }} />
+          }
         </IconButton>
       </Toolbar>
     </AppBar>

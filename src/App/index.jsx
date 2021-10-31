@@ -1,38 +1,40 @@
 import React, { useState } from "react";
-import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 
+import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { useTheme } from '@mui/material/styles';
+import { useMediaQuery } from "@material-ui/core";
+
 import NavBar from "./NavBar";
-
 import appRoutes from "./routes";
-
 import light from "../themes/light-theme";
 import dark from "../themes/dark-theme";
-
-const SwitchChild = ({ route }) => {
-  const Component = route.component;
-  return (
-    route.redirect ? (
-      <Redirect from={route.path} to={route.pathTo} />
-    ) : (
-      <Route path={route.path} render={() => <Component />} exact />
-    )
-  )
-};
 
 const App = () => {
   const lightTheme = createTheme(light);
   const darkTheme = createTheme(dark);
 
   const [isThemeLight, setThemeLight] = useState(false);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
     <MuiThemeProvider theme={isThemeLight ? lightTheme : darkTheme}>
+      <CssBaseline/>
       <Router>
-        <NavBar isThemeLight={isThemeLight} setThemeLight={setThemeLight} />
+        <NavBar isMobile={!matches} 
+          isThemeLight={isThemeLight} setThemeLight={setThemeLight} 
+        />
         <Switch>
           {appRoutes.map((route) => (
-            <SwitchChild key={route.id} route={route} />
+            route.redirect ? (
+              <Redirect key={route.id} from={route.path} to={route.pathTo} />
+            ) : (
+              <Route key={route.id} path={route.path} 
+                render={(props) => <route.component {...props} />} 
+              />
+            )
           ))}
         </Switch>
       </Router>
