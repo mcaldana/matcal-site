@@ -8,6 +8,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 import NavBar from "./NavBar";
 import appRoutes from "./routes";
+import Layout from "../components/Layout";
 import light from "../themes/light-theme";
 import dark from "../themes/dark-theme";
 
@@ -21,22 +22,25 @@ const App = () => {
 
   return (
     <ThemeProvider theme={isThemeLight ? lightTheme : darkTheme}>
-      <CssBaseline/>
+      <CssBaseline />
       <Router>
-        <NavBar isMobile={!matches} 
-          isThemeLight={isThemeLight} setThemeLight={setThemeLight} 
+        <NavBar isMobile={!matches}
+          isThemeLight={isThemeLight} setThemeLight={setThemeLight}
         />
-        <Switch>
-          {appRoutes.map((route) => (
-            route.redirect ? (
-              <Redirect key={route.id} from={route.path} to={route.pathTo} />
-            ) : (
-              <Route key={route.id} path={route.path} 
-                render={(props) => <route.component {...props} />} 
-              />
-            )
-          ))}
-        </Switch>
+        <Layout>
+          <Switch>
+            {appRoutes.map((route) => (
+              route.redirect ? (
+                <Redirect key={route.id} from={route.path} to={route.pathTo} />
+              ) : (
+
+                <Route key={route.id} path={route.path}
+                  render={(props) => <route.component {...props} />}
+                />
+              )
+            ))}
+          </Switch>
+        </Layout>
       </Router>
     </ThemeProvider>
   );

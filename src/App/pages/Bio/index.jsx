@@ -6,9 +6,20 @@ import { Typography } from "@mui/material";
 
 const Bio = () => {
   return (
-    <Typography>
-      Bio Page
-    </Typography>
+    <React.Fragment>
+      <Typography variant="h3">
+        Bio
+      </Typography>
+      <Typography variant="h5">
+        Work Experience
+      </Typography>
+      <Typography variant="h5">
+        Education
+      </Typography>
+      <Typography variant="h5">
+        Skills
+      </Typography>
+    </React.Fragment>
   );
 }
 

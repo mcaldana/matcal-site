@@ -2,9 +2,8 @@ import React from "react";
 import { useHistory } from 'react-router-dom';
 
 import Typography from "@mui/material/Typography";
-import CardContent from "@mui/material/CardContent";
 import Grid from '@mui/material/Grid';
-import { Button } from "@mui/material";
+import { Button, List, ListItem } from "@mui/material";
 import CardMedia from '@mui/material/CardMedia';
 
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
@@ -18,15 +17,15 @@ const Homepage = () => {
   return (
     <React.Fragment>
       {/* TODO: carousel here https://github.com/Learus/react-material-ui-carousel */}
-      <Grid container justifyContent="space-between">
-        <CardContent sx={{ flex: '1 0 auto' }}>
+      <Grid container justifyContent="space-between" alignItems="center">
+        <Grid item>
           <Typography variant="h3" component="h2">
             Matteo Caldana
           </Typography>
           <Typography variant="h5" color="textSecondary">
             PhD Student in Mathematical Models at PoliMi
           </Typography>
-        </CardContent>
+        </Grid>
         <CardMedia
           component="img"
           sx={{ width: 140, height: 140, borderRadius: "50%", padding: "10px" }}
@@ -45,22 +44,26 @@ const Homepage = () => {
       <Typography component="p">
         Proficient in many programming languages, among them: C++, Python, Javascript, SQL.
       </Typography>
-      {/* TODO: set better secondary */}
+
       <Button color="secondary" endIcon={<KeyboardArrowRightIcon />} onClick={() => history.push('/bio')}>
         More about my skills and professional experience
       </Button>
 
       <Typography variant="h6">
-        Get in contact with me!
+        Get in contact with me:
       </Typography>
-      <Typography>
-        <LinkedInIcon /> Linkedin
-      </Typography>
-      <Typography>
-        <MailOutlineIcon /> Email
-      </Typography>
-
-
+      <List>
+        <ListItem dense>
+          <Button color="info" href="https://it.linkedin.com/in/matteo-caldana-7671851b0" startIcon={<LinkedInIcon />}>
+            Linkedin
+          </Button>
+        </ListItem>
+        <ListItem dense>
+          <Button color="info" href="mailto:username@example.com" startIcon={<MailOutlineIcon />}>
+            Email
+          </Button>
+        </ListItem>
+      </List>
     </React.Fragment>
   );
 }

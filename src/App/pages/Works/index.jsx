@@ -36,7 +36,7 @@ const Works = () => {
 
   return (
     <React.Fragment>
-      <Typography variant="h3" component="h2">
+      <Typography variant="h3">
         Works
       </Typography>
       <div>
